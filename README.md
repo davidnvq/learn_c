@@ -1,0 +1,10 @@
+
+
+PolygoneAjouterSommetEnIeme polygon_add_vertex_at_i
+pNouveauSommet  p_new_vertex
+PolygoneAjouterSommetEnFin PolygonAddSummetAtEnd
+pPremierSommet p_first_vertex
+sSommet sVertex
+PolygoneCreer 
+NbSommets Nb_vertices
+
