@@ -1,0 +1,2 @@
+contex: contex.c
+	gcc -o contex contex.c

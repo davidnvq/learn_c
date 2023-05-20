@@ -1,0 +1,2 @@
+contex: regex.c
+	gcc -o contex regex.c

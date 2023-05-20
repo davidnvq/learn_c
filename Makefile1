@@ -1,0 +1,2 @@
+testpolygon: testpolygon.c
+	gcc -o testpolygon testpolygon.c
