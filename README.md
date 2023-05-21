@@ -45,3 +45,15 @@ gcc contex.c image.c polygon.c svg.c -o contex
 # for im2
 ./contex "data/im2.pgm" "/full/data/im2.png" "full/data/contour2.ct" "full/data/im2.svg";
 ```
+
+### Note for Makefilen
+
+```bash
+# Your Windows PC seems not able to run Makefilen
+
+# But when you look into the commands in these files, they are actually similar to what are presented above!
+
+# The Makefilen is only for running on the server(?)
+make -f Makefile1
+make -f Makefile2
+```
