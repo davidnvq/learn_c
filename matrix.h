@@ -7,22 +7,22 @@ typedef struct
     int rows;
     int cols;
     unsigned char **data;
-} Matrix;
-typedef unsigned char **tMatrix;
+} Matrice;
+typedef unsigned char **tMatrice;
 
 // Function to allocate memory for a matrix
-tMatrix MatAllouer(int NbLig, int NbCol);
+extern tMatrice MatAllouer(int NbLig, int NbCol);
 
 // Function to read a matrix from input and return it
-tMatrix MatLire(int *pNbLig, int *pNbCol);
+extern tMatrice MatLire(int *pNbLig, int *pNbCol);
 
 // Function to display a matrix
-void MatDisplay(tMatrix Mat, int NbLig, int NbCol);
+extern void MatAfficher(tMatrice Mat, int NbLig, int NbCol);
 
 // Function to create a copy of a matrix
-tMatrix MatCopy(tMatrix Mat, int NbLig, int NbCol);
+tMatrice MatCopier(tMatrice Mat, int NbLig, int NbCol);
 
 // Function to deallocate memory used by a matrix
-void MatLiberer(tMatrix *pMat, int NbLig);
+extern void MatLiberer(tMatrice *pMat, int NbLig);
 
 #endif

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "image.c"
+#include "image.h"
 
 int main()
 {
@@ -8,7 +8,7 @@ int main()
     int NbColonnes = 4;
 
     // Allocate memory for the image
-    tImage image = ImAllocate(NbLignes, NbColonnes);
+    tImage image = ImAllouer(NbLignes, NbColonnes);
     if (image == NULL)
     {
         printf("Failed to allocate memory for the image\n");
@@ -22,13 +22,13 @@ int main()
     tImage image1 = ImLire("data/im0.pgm");
 
     // Get the gray levels matrix of the image
-    tMatrix matrix = ImNivGray(image1);
+    tMatrice matrix = ImNivGray(image1);
 
     NbLignes = ImNbLig(image1);
     NbColonnes = ImNbCol(image1);
 
     // Display matrix
-    MatDisplay(matrix, NbLignes, NbColonnes);
+    MatAfficher(matrix, NbLignes, NbColonnes);
 
     ImEcrire(image1, "data/im0_copy.pgm");
     return 0;

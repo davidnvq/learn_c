@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "matrix.c"
+#include "matrix.h"
 
 int main()
 {
     int NbLig = 3;
     int NbCol = 4;
 
-    tMatrix matrix = MatAllouer(NbLig, NbCol);
+    tMatrice matrix = MatAllouer(NbLig, NbCol);
     if (matrix == NULL)
     {
         printf("Memory allocation failed\n");
@@ -22,14 +22,14 @@ int main()
     free(matrix[0]); // Free the data
     free(matrix);    // Free the row pointers
 
-    tMatrix matrix1 = MatLire(&NbLig, &NbCol);
+    tMatrice matrix1 = MatLire(&NbLig, &NbCol);
 
-    MatDisplay(matrix1, NbLig, NbCol);
+    MatAfficher(matrix1, NbLig, NbCol);
 
     // Create a copy of the matrix
-    tMatrix copy = MatCopy(matrix1, NbLig, NbCol);
+    tMatrice copy = MatCopier(matrix1, NbLig, NbCol);
 
-    MatDisplay(copy, NbLig, NbCol);
+    MatAfficher(copy, NbLig, NbCol);
 
     // TODO: Can't work properly.
     // MatLiberer(&matrix1, NbLig);

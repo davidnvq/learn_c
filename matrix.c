@@ -6,7 +6,7 @@
 #define NBCOLMAX 100
 unsigned char tab[NBLIGMAX][NBCOLMAX];
 
-tMatrix MatAllouer(int NbLig, int NbCol)
+tMatrice MatAllouer(int NbLig, int NbCol)
 {
     // Allocate memory for the matrix data
     unsigned char *data = (unsigned char *)malloc(NbLig * NbCol * sizeof(unsigned char));
@@ -35,7 +35,7 @@ tMatrix MatAllouer(int NbLig, int NbCol)
     return rows;
 }
 
-tMatrix MatLire(int *pNbLig, int *pNbCol)
+tMatrice MatLire(int *pNbLig, int *pNbCol)
 {
     // Ask the user for the number of rows and columns
     printf("Enter the number of rows: ");
@@ -44,7 +44,7 @@ tMatrix MatLire(int *pNbLig, int *pNbCol)
     scanf("%d", pNbCol);
 
     // Allocate the matrix
-    tMatrix matrix = MatAllouer(*pNbLig, *pNbCol);
+    tMatrice matrix = MatAllouer(*pNbLig, *pNbCol);
     if (matrix == NULL)
     {
         printf("Memory allocation failed\n");
@@ -64,7 +64,7 @@ tMatrix MatLire(int *pNbLig, int *pNbCol)
     return matrix;
 }
 
-void MatDisplay(tMatrix Mat, int NbLig, int NbCol)
+void MatAfficher(tMatrice Mat, int NbLig, int NbCol)
 {
     for (int i = 0; i < NbLig; i++)
     {
@@ -76,10 +76,10 @@ void MatDisplay(tMatrix Mat, int NbLig, int NbCol)
     }
 }
 
-tMatrix MatCopy(tMatrix Mat, int NbLig, int NbCol)
+tMatrice MatCopier(tMatrice Mat, int NbLig, int NbCol)
 {
     // Allocate memory for the copy
-    tMatrix copy = MatAllouer(NbLig, NbCol);
+    tMatrice copy = MatAllouer(NbLig, NbCol);
     if (copy == NULL)
     {
         return NULL;
@@ -97,7 +97,7 @@ tMatrix MatCopy(tMatrix Mat, int NbLig, int NbCol)
     return copy;
 }
 
-void MatLiberer(tMatrix *pMat, int NbLig)
+void MatLiberer(tMatrice *pMat, int NbLig)
 {
     if (pMat == NULL || *pMat == NULL)
     {

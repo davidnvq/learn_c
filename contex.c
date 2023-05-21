@@ -13,7 +13,7 @@ int ContourLabelsFromImage(tImage image, unsigned char Labels[])
 
     int NbLig = image->NbLig;
     int NbCol = image->NbCol;
-    tMatrix matrix = image->matrix;
+    tMatrice matrix = image->matrix;
 
     // Maximum number of labels is 256, since the pixel values are in range 0-255
     int maxLabels = 256;

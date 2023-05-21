@@ -6,7 +6,7 @@
 
 // The corresponding private implementation type is:
 
-tImage ImAllocate(int NbLignes, int NbColonnes)
+tImage ImAllouer(int NbLignes, int NbColonnes)
 {
     tImage image = (tImage)malloc(sizeof(struct sImage));
     if (image == NULL)
@@ -17,7 +17,7 @@ tImage ImAllocate(int NbLignes, int NbColonnes)
     image->NbLig = NbLignes;
     image->NbCol = NbColonnes;
 
-    image->matrix = (tMatrix)malloc(NbLignes * sizeof(unsigned char *));
+    image->matrix = (tMatrice)malloc(NbLignes * sizeof(unsigned char *));
     if (image->matrix == NULL)
     {
         free(image);
@@ -79,7 +79,7 @@ int ImNbCol(tImage Im)
 }
 
 // This function returns the grayscale matrix of the image Im.
-tMatrix ImNivGray(tImage Im)
+tMatrice ImNivGray(tImage Im)
 {
     return Im->matrix;
 }
@@ -112,7 +112,7 @@ tImage ImLire(char FileName[])
     fscanf(file, "%d", &maxGreyLevel);
 
     // Allocate memory for the image
-    tImage image = ImAllocate(NbLig, NbCol);
+    tImage image = ImAllouer(NbLig, NbCol);
     if (image == NULL)
     {
         printf("Failed to allocate memory for the image\n");
