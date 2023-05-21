@@ -2,12 +2,6 @@
 #define MATRIX_H
 
 // Structure to represent a matrix
-typedef struct
-{
-    int rows;
-    int cols;
-    unsigned char **data;
-} Matrice;
 typedef unsigned char **tMatrice;
 
 // Function to allocate memory for a matrix
