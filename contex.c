@@ -57,6 +57,7 @@ int ContourLabelsFromImage(tImage image, unsigned char Labels[])
 }
 
 // Return the number of labels and store the labels in the array `labels` from the given pgm file
+// int ContourEtiquettes(char NomFichEtiquettes[], unsigned char Etiquettes[])
 int ContourLabels(char pgmFileName[], unsigned char labels[])
 {
     tImage image = ImLire(pgmFileName);
@@ -65,7 +66,8 @@ int ContourLabels(char pgmFileName[], unsigned char labels[])
 }
 
 // Return the next contour polygon for the given label
-tPolygon ContourSuivi(tImage image, unsigned char label)
+// tPolygone ContourSuivi(tImage Im, unsigned char Etiquette)
+tPolygone ContourSuivi(tImage image, unsigned char label)
 {
     int startX = -1, startY = -1;
     int x, y;
@@ -99,9 +101,9 @@ tPolygon ContourSuivi(tImage image, unsigned char label)
     int max_pixels = image->NbLig * image->NbCol;
     unsigned char *visited = (unsigned char *)calloc(max_pixels, sizeof(unsigned char));
 
-    tPolygon contourPolygon = (tPolygon)malloc(sizeof(struct sPolygon));
-    contourPolygon->Nb_vertices = 0;
-    contourPolygon->p_first_vertex = NULL;
+    tPolygone contourPolygon = (tPolygone)malloc(sizeof(struct sPolygone));
+    contourPolygon->NbSommets = 0;
+    contourPolygon->PremierSommet = NULL;
 
     x = startX;
     y = startY;
@@ -110,7 +112,7 @@ tPolygon ContourSuivi(tImage image, unsigned char label)
     prev_y = startY;
 
     // printf("Add this vertex to contour polygon: (%d, %d) \n", x, y);
-    polygon_add_vertex_at_end(x, y, contourPolygon);
+    PolygoneAjouterSommetEnFin(x, y, contourPolygon);
 
     // For the first vertex, we need to go left
     x = x - 1;
@@ -125,7 +127,7 @@ tPolygon ContourSuivi(tImage image, unsigned char label)
             if (visited[idx] == 0)
             {
                 // printf("Add this vertex to contour polygon: (%d, %d) \n", x, y);
-                polygon_add_vertex_at_end(x, y, contourPolygon);
+                PolygoneAjouterSommetEnFin(x, y, contourPolygon);
                 visited[idx] = 1; // Mark as visited, so we don't add it again to the contour
             }
             if (x == prev_x)
@@ -172,6 +174,8 @@ tPolygon ContourSuivi(tImage image, unsigned char label)
     return contourPolygon;
 }
 
+// Extract the contour polygons for the given labels and write them to the given file
+// void ContourExtraire(char NomFichEtiquettes[], unsigned char Etiquette[], int NbRegions, char NomFichContours[])
 void ExtractContour(char *FileName, unsigned char Labels[], int NbRegions, char *ContourFileName)
 {
     // Read the PGM file (open the pgm file to see the format!)
@@ -183,19 +187,21 @@ void ExtractContour(char *FileName, unsigned char Labels[], int NbRegions, char 
     {
         unsigned char label = Labels[i];
         // Find the next contour polygon which has the label = Labels[i]
-        tPolygon contourPolygon = ContourSuivi(image, label);
+        tPolygone contourPolygon = ContourSuivi(image, label);
         if (contourPolygon != NULL)
         {
             // printf("Writing contour %d to file\n", i);
 
             // Write the contour polygon to the file, ONE at a time
-            PolygonWrite(contourPolygon, file);
+            PolygoneEcriref(contourPolygon, file);
             PolygonLiberer(contourPolygon); // free the memory for the polygon
         }
     }
     fclose(file);
 }
 
+// Write the given contour polygons to the given SVG file
+// void ContourEcrireSurImageSvg(char NomFichContours[], char NomFichImage[], int NbCol, int NbLig, tStyle *pStyle, char NomFichSVG[])
 void ContourWriteOverImageSvg(char *ContourFileName, char *ImageFileName, int NbCol, int NbLig, tStyle *pStyle, char *SvgFileName)
 {
     FILE *contFile = fopen(ContourFileName, "r");
@@ -212,7 +218,7 @@ void ContourWriteOverImageSvg(char *ContourFileName, char *ImageFileName, int Nb
 
     for (int i = 0; i < numRegions; i++)
     {
-        tPolygon poly = PolygonCreate();
+        tPolygone poly = PolygoneCreer();
         int numVertices;
 
         fscanf(contFile, "%d", &numVertices);
@@ -222,10 +228,10 @@ void ContourWriteOverImageSvg(char *ContourFileName, char *ImageFileName, int Nb
         {
             int x, y;
             fscanf(contFile, "%d %d", &x, &y);
-            polygon_add_vertex_at_end(x, y, poly);
+            PolygoneAjouterSommetEnFin(x, y, poly);
         }
         // write ONE polygon to the svg file at a time
-        PolygonWriteSvg(poly, pStyle, svgFile);
+        PolygoneEcrireSvg(poly, pStyle, svgFile);
         PolygonLiberer(poly); // free the memory allocated for the polygon after finish!
     }
     // Close the files

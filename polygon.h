@@ -3,40 +3,42 @@
 
 #include "svg.h"
 
-struct sVertex // Vertex
+struct sSommet // Vertex
 {
     int x, y;
-    struct sVertex *p_next; // pNext
+    struct sSommet *pSuivant; // pNext
 };
 
-struct sPolygon
+struct sPolygone
 {
-    int Nb_vertices;                // number of vertices
-    struct sVertex *p_first_vertex; // pointer to first vertex
+    int NbSommets;                 // number of vertices
+    struct sSommet *PremierSommet; // pointer to first vertex
 };
 
-typedef struct sPolygon *tPolygon;
+typedef struct sPolygone *tPolygone;
 
-int PolygoneNb_vertices(tPolygon Poly);
+int PolygoneNbSommets(tPolygone Poly);
 
-tPolygon PolygonCreate(void);
+tPolygone PolygoneCreer(void);
 
-void display_polygon_vertex_i(int i, tPolygon Poly);
+void PolygoneSommetIeme(int i, tPolygone Poly);
 
-void polygon_add_vertex_at_i(int x, int y, int i, tPolygon Poly);
+void PolygoneAjouterSommetEnIeme(int x, int y, int i, tPolygone Poly);
 
-void display_polygon(tPolygon Poly);
+void PolygoneAfficher(tPolygone Poly);
 
-void polygon_add_vertex_at_end(int x, int y, tPolygon Poly);
+void PolygoneAjouterSommetEnFin(int x, int y, tPolygone Poly);
 
-void polygon_add_vertex_at_begin(int x, int y, tPolygon Poly);
+void PolygoneAjouterSommetEnDebut(int x, int y, tPolygone Poly);
 
-void PolygonLiberer(tPolygon Poly);
+void PolygonLiberer(tPolygone Poly);
 
-tPolygon PolygonRead(FILE *f);
+tPolygone PolygoneLiref(FILE *f);
 
-void PolygonWrite(tPolygon Poly, FILE *f);
+void PolygoneEcriref(tPolygone Poly, FILE *f);
 
-void delete_polygon_vertex_i(int i, tPolygon Poly);
-void PolygonWriteSvg(tPolygon Poly, tStyle *pStyle, FILE *IdFichSVG);
+void PolygoneSommetSupprimerIeme(int i, tPolygone Poly);
+
+void PolygoneEcrireSvg(tPolygone Poly, tStyle *pStyle, FILE *IdFichSVG);
+
 #endif

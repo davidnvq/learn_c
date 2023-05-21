@@ -41,7 +41,7 @@ FILE *SvgCreate(char NomFichier[], int Largeur, int Hauteur)
 void SvgWriteImage(FILE *IdFichSVG, char NomFichierImage[], int NbCol, int NbLig)
 {
   // Write the image tag with the link to the file containing the image
-  fprintf(IdFichSVG, "<image x=\"-0.5\" y=\"-0.5\" width=\"%dpx\" height=\"%dpx\" opacity=\"0.5\"\n",
+  fprintf(IdFichSVG, "<image x=\"-0.5\" y=\"-0.5\" width=\"%dpx\" height=\"%dpx\"\n",
           NbCol, NbLig);
   fprintf(IdFichSVG, "       xlink:href=\"%s\"\n", NomFichierImage);
   fprintf(IdFichSVG, "       image-rendering=\"pixelated\">\n");

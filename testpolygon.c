@@ -2,38 +2,38 @@
 #include <stdlib.h>
 #include "polygon.c"
 
-tPolygon create_a_polygon_with_n_vertices(int n_vertices)
+tPolygone create_a_polygon_with_n_vertices(int n_vertices)
 {
-    tPolygon poly = PolygonCreate();
+    tPolygone poly = PolygoneCreer();
 
     // Adding vertices
     for (int i = 0; i < n_vertices; i++)
     {
-        polygon_add_vertex_at_end(i, i, poly);
+        PolygoneAjouterSommetEnFin(i, i, poly);
     }
-    display_polygon(poly);
+    PolygoneAfficher(poly);
 
     return poly;
 }
 
-tPolygon create_my_polygon(void)
+tPolygone create_my_polygon(void)
 {
-    tPolygon poly = PolygonCreate();
+    tPolygone poly = PolygoneCreer();
 
     // Adding vertices
-    polygon_add_vertex_at_end(0, 0, poly);
-    polygon_add_vertex_at_end(0, 10, poly);
-    polygon_add_vertex_at_end(0, 20, poly);
-    polygon_add_vertex_at_end(10, 10, poly);
-    polygon_add_vertex_at_end(10, 0, poly);
-    display_polygon(poly);
+    PolygoneAjouterSommetEnFin(0, 0, poly);
+    PolygoneAjouterSommetEnFin(0, 10, poly);
+    PolygoneAjouterSommetEnFin(0, 20, poly);
+    PolygoneAjouterSommetEnFin(10, 10, poly);
+    PolygoneAjouterSommetEnFin(10, 0, poly);
+    PolygoneAfficher(poly);
     return poly;
 }
 void test_polygon_write(void)
 {
     FILE *file = fopen("output.txt", "w");
-    tPolygon poly = create_a_polygon_with_n_vertices(10);
-    PolygonWrite(poly, file);
+    tPolygone poly = create_a_polygon_with_n_vertices(10);
+    PolygoneEcriref(poly, file);
     PolygonLiberer(poly);
     fclose(file);
 }
@@ -41,38 +41,38 @@ void test_polygon_write(void)
 void test_polygon_read(void)
 {
     FILE *file = fopen("input.txt", "r");
-    tPolygon poly = PolygonRead(file);
+    tPolygone poly = PolygoneLiref(file);
 
-    display_polygon(poly);
+    PolygoneAfficher(poly);
     PolygonLiberer(poly);
     fclose(file);
 }
 
 void test_add_vertex_at_begin(void)
 {
-    tPolygon poly = PolygonCreate();
+    tPolygone poly = PolygoneCreer();
 
     // Adding vertices
-    polygon_add_vertex_at_begin(0, 0, poly);
-    polygon_add_vertex_at_begin(1, 1, poly);
-    polygon_add_vertex_at_begin(2, 2, poly);
-    polygon_add_vertex_at_begin(3, 3, poly);
-    display_polygon(poly);
+    PolygoneAjouterSommetEnDebut(0, 0, poly);
+    PolygoneAjouterSommetEnDebut(1, 1, poly);
+    PolygoneAjouterSommetEnDebut(2, 2, poly);
+    PolygoneAjouterSommetEnDebut(3, 3, poly);
+    PolygoneAfficher(poly);
 
     free(poly);
 }
 
 void test_add_vertex_at_i(void)
 {
-    tPolygon poly = PolygonCreate();
+    tPolygone poly = PolygoneCreer();
 
     // Adding vertices
-    polygon_add_vertex_at_i(1, 1, 0, poly);
-    polygon_add_vertex_at_i(2, 2, 1, poly);
-    polygon_add_vertex_at_i(3, 3, 2, poly);
+    PolygoneAjouterSommetEnIeme(1, 1, 0, poly);
+    PolygoneAjouterSommetEnIeme(2, 2, 1, poly);
+    PolygoneAjouterSommetEnIeme(3, 3, 2, poly);
 
     // Printing the number of vertices and their coordinates
-    display_polygon(poly);
+    PolygoneAfficher(poly);
 
     PolygonLiberer(poly);
 }
@@ -80,59 +80,59 @@ void test_add_vertex_at_i(void)
 void test_display_polygon_vertex_i(void)
 {
     printf("Create a polygon with 5\n");
-    tPolygon poly = create_a_polygon_with_n_vertices(5);
+    tPolygone poly = create_a_polygon_with_n_vertices(5);
 
-    display_polygon_vertex_i(0, poly);
-    display_polygon_vertex_i(2, poly);
-    display_polygon_vertex_i(3, poly);
-    display_polygon_vertex_i(4, poly);
-    display_polygon_vertex_i(5, poly);
-    display_polygon_vertex_i(6, poly);
+    PolygoneSommetIeme(0, poly);
+    PolygoneSommetIeme(2, poly);
+    PolygoneSommetIeme(3, poly);
+    PolygoneSommetIeme(4, poly);
+    PolygoneSommetIeme(5, poly);
+    PolygoneSommetIeme(6, poly);
     PolygonLiberer(poly);
 }
 
 void test_add_vertex_at_end(void)
 {
-    tPolygon poly = PolygonCreate();
+    tPolygone poly = PolygoneCreer();
 
     // Adding vertices
-    polygon_add_vertex_at_end(2, 3, poly);
-    polygon_add_vertex_at_end(4, 5, poly);
-    polygon_add_vertex_at_end(6, 7, poly);
-    polygon_add_vertex_at_end(6, 7, poly);
-    display_polygon(poly);
+    PolygoneAjouterSommetEnFin(2, 3, poly);
+    PolygoneAjouterSommetEnFin(4, 5, poly);
+    PolygoneAjouterSommetEnFin(6, 7, poly);
+    PolygoneAjouterSommetEnFin(6, 7, poly);
+    PolygoneAfficher(poly);
 
     PolygonLiberer(poly);
 }
 
 void test_delete_polygon_vertex_i(void)
 {
-    tPolygon poly1 = create_a_polygon_with_n_vertices(3);
+    tPolygone poly1 = create_a_polygon_with_n_vertices(3);
 
     printf("Delete at 0\n");
-    delete_polygon_vertex_i(0, poly1);
-    display_polygon(poly1);
+    PolygoneSommetSupprimerIeme(0, poly1);
+    PolygoneAfficher(poly1);
     PolygonLiberer(poly1);
 
     printf("Delete at end\n");
-    tPolygon poly2 = create_a_polygon_with_n_vertices(3);
-    delete_polygon_vertex_i(2, poly2);
-    display_polygon(poly2);
+    tPolygone poly2 = create_a_polygon_with_n_vertices(3);
+    PolygoneSommetSupprimerIeme(2, poly2);
+    PolygoneAfficher(poly2);
     PolygonLiberer(poly2);
 
     printf("Delete at begin\n");
-    tPolygon poly3 = create_a_polygon_with_n_vertices(3);
-    delete_polygon_vertex_i(0, poly3);
-    display_polygon(poly3);
+    tPolygone poly3 = create_a_polygon_with_n_vertices(3);
+    PolygoneSommetSupprimerIeme(0, poly3);
+    PolygoneAfficher(poly3);
     PolygonLiberer(poly3);
 }
 
 void test_polygon_write_svg(void)
 {
     FILE *file = SvgCreate("output.svg", 1000, 1000);
-    tPolygon Poly = create_my_polygon();
+    tPolygone Poly = create_my_polygon();
     // tPolygon Poly = create_a_polygon_with_n_vertices(5);
-    display_polygon(Poly);
+    PolygoneAfficher(Poly);
 
     tStyle *Style = (tStyle *)malloc(sizeof(tStyle));
 
@@ -144,7 +144,7 @@ void test_polygon_write_svg(void)
     Style->ColorPoints = "red";
     Style->RadiusPoints = 0.125;
 
-    PolygonWriteSvg(Poly, Style, file);
+    PolygoneEcrireSvg(Poly, Style, file);
     SvgClose(file);
     PolygonLiberer(Poly);
     free(Style);
