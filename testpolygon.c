@@ -1,164 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "svg.c"
-
-struct sVertex // Vertex
-{
-    int x, y;
-    struct sVertex *p_next; // pNext
-};
-
-struct sPolygon
-{
-    int Nb_vertices;                // number of vertices
-    struct sVertex *p_first_vertex; // pointer to first vertex
-};
-
-typedef struct sPolygon *tPolygon;
-
-// return the number of vertices of the polygon
-int PolygoneNb_vertices(tPolygon Poly)
-{
-    return Poly->Nb_vertices;
-}
-
-// create an empty polygon
-/// return type : tPolygon (a pointer to a struct sPolygon)
-// tPolygon PolygonCreate(void)
-tPolygon PolygonCreate(void)
-{
-    // tPolygon is a typecast
-    tPolygon pPolygon = (tPolygon)malloc(sizeof(struct sPolygon)); // (4+8=12 bytes)
-    pPolygon->Nb_vertices = 0;
-    pPolygon->p_first_vertex = NULL;
-    return pPolygon;
-}
-
-// Print the coordinates of ith vertex of the polygon
-void display_polygon_vertex_i(int i, tPolygon Poly)
-{
-    if (i < 0 || i >= Poly->Nb_vertices)
-    {
-        fprintf(stderr, "Invalid position to add vertex.\n");
-        return;
-    }
-
-    struct sVertex *pCurrent = Poly->p_first_vertex;
-    int cpt = 0;
-    while (cpt < i)
-    {
-        pCurrent = pCurrent->p_next;
-        cpt++;
-    }
-    printf("%d %d \n", pCurrent->x, pCurrent->y);
-}
-
-// add a vertex of coordinates (x,y) in ith position of the polygon
-void polygon_add_vertex_at_i(int x, int y, int i, tPolygon Poly)
-{
-    struct sVertex *newVertex = (struct sVertex *)malloc(sizeof(struct sVertex));
-    if (newVertex == NULL)
-    {
-        fprintf(stderr, "Memory allocation failed.\n");
-        return;
-    }
-    newVertex->x = x;
-    newVertex->y = y;
-    newVertex->p_next = NULL;
-
-    if (i < 0 || i > Poly->Nb_vertices)
-    {
-        fprintf(stderr, "Invalid position to add vertex.\n");
-        free(newVertex);
-        return;
-    }
-
-    if (i == 0)
-    {
-        newVertex->p_next = Poly->p_first_vertex;
-        Poly->p_first_vertex = newVertex;
-    }
-    else
-    {
-        struct sVertex *prevVertex = Poly->p_first_vertex;
-        for (int j = 1; j < i; j++)
-        {
-            prevVertex = prevVertex->p_next;
-        }
-        newVertex->p_next = prevVertex->p_next;
-        prevVertex->p_next = newVertex;
-    }
-
-    Poly->Nb_vertices++;
-}
-
-// Print the coordinates of the vertices of the polygon
-void display_polygon(tPolygon Poly)
-{
-    struct sVertex *pCurrent = Poly->p_first_vertex;
-    printf("%d\n", Poly->Nb_vertices);
-    while (pCurrent != NULL)
-    {
-        printf("%d %d \n", pCurrent->x, pCurrent->y);
-        pCurrent = pCurrent->p_next;
-    }
-    printf("\n");
-}
-
-// add a vertex of coordinates (x,y) at the end of the polygon
-void polygon_add_vertex_at_end(int x, int y, tPolygon Poly)
-{
-    // allocate memory for a new vertex
-    struct sVertex *p_new_vertex = (struct sVertex *)malloc(sizeof(struct sVertex));
-
-    // set the coordinates of the new vertex
-    p_new_vertex->x = x;
-    p_new_vertex->y = y;
-
-    // set the next vertex to NULL
-    p_new_vertex->p_next = NULL;
-
-    // if the polygon is empty
-    if (Poly->p_first_vertex == NULL)
-    {
-        // set the first vertex to the new vertex
-        Poly->p_first_vertex = p_new_vertex;
-    }
-    else
-    {
-        // if the polygon is not empty, find the last vertex
-        struct sVertex *pCurrent = Poly->p_first_vertex;
-        while (pCurrent->p_next != NULL)
-        {
-            pCurrent = pCurrent->p_next;
-        }
-
-        // set the next vertex of the last vertex to the new vertex
-        pCurrent->p_next = p_new_vertex;
-    }
-    Poly->Nb_vertices++;
-}
-
-// ajouter un sommet de coordonnées (x,y) au début du polygone
-// add a vertex of coordinates (x,y) at the beginning of the polygon
-// void PolygoneAjouterSommetEnDebut(int x, int y, tPolygon Poly)
-void polygon_add_vertex_at_begin(int x, int y, tPolygon Poly)
-{
-    // allocate memory for the new vertex:
-    struct sVertex *p_new_vertex_at_begin = (struct sVertex *)malloc(sizeof(struct sVertex));
-
-    // set the coordinates of the new vertex at the beginning:
-    p_new_vertex_at_begin->x = x;
-    p_new_vertex_at_begin->y = y;
-
-    // The next vertex of the vertext at the beginning is the first vertex of the polygon:
-    // If p_first_vertex is NULL, then p_new_vertex_at_begin->p_next is NULL (poly is empty)
-    p_new_vertex_at_begin->p_next = Poly->p_first_vertex;
-
-    // update the polygon
-    Poly->Nb_vertices++;
-    Poly->p_first_vertex = p_new_vertex_at_begin;
-}
+#include "polygon.c"
 
 tPolygon create_a_polygon_with_n_vertices(int n_vertices)
 {
@@ -174,47 +16,19 @@ tPolygon create_a_polygon_with_n_vertices(int n_vertices)
     return poly;
 }
 
-// Freeing the memory occupied by the polygon
-void PolygonLiberer(tPolygon Poly)
-{
-    struct sVertex *current = Poly->p_first_vertex;
-    while (current != NULL)
-    {
-        struct sVertex *temp = current;
-        current = current->p_next;
-        free(temp);
-    }
-
-    free(Poly);
-}
-
-tPolygon PolygonRead(FILE *f)
+tPolygon create_my_polygon(void)
 {
     tPolygon poly = PolygonCreate();
-    int numVertices;
-    fscanf(f, "%d", &numVertices);
 
-    for (int i = 0; i < numVertices; i++)
-    {
-        int x, y;
-        fscanf(f, "%d %d", &x, &y);
-        polygon_add_vertex_at_end(x, y, poly);
-    }
-
+    // Adding vertices
+    polygon_add_vertex_at_end(0, 0, poly);
+    polygon_add_vertex_at_end(0, 10, poly);
+    polygon_add_vertex_at_end(0, 20, poly);
+    polygon_add_vertex_at_end(10, 10, poly);
+    polygon_add_vertex_at_end(10, 0, poly);
+    display_polygon(poly);
     return poly;
 }
-
-void PolygonWrite(tPolygon Poly, FILE *f)
-{
-    fprintf(f, "%d\n", Poly->Nb_vertices);
-    struct sVertex *current = Poly->p_first_vertex;
-    while (current != NULL)
-    {
-        fprintf(f, "%d %d\n", current->x, current->y);
-        current = current->p_next;
-    }
-}
-
 void test_polygon_write(void)
 {
     FILE *file = fopen("output.txt", "w");
@@ -291,30 +105,6 @@ void test_add_vertex_at_end(void)
     PolygonLiberer(poly);
 }
 
-// Delete the ith vertex of the polygon
-void delete_polygon_vertex_i(int i, tPolygon Poly)
-{
-    struct sVertex *pCurrent = Poly->p_first_vertex;
-    int cpt = 0;
-    if (i == 0)
-    {
-        Poly->p_first_vertex = pCurrent->p_next;
-        free(pCurrent);
-    }
-    else
-    {
-        while (cpt < i - 1)
-        {
-            pCurrent = pCurrent->p_next;
-            cpt++;
-        }
-        struct sVertex *p_current_next = pCurrent->p_next;
-        pCurrent->p_next = p_current_next->p_next;
-        free(p_current_next);
-    }
-    Poly->Nb_vertices--;
-}
-
 void test_delete_polygon_vertex_i(void)
 {
     tPolygon poly1 = create_a_polygon_with_n_vertices(3);
@@ -337,47 +127,6 @@ void test_delete_polygon_vertex_i(void)
     PolygonLiberer(poly3);
 }
 
-void PolygonWriteSvg(tPolygon Poly, tStyle *pStyle, FILE *IdFichSVG)
-{
-    float *x = (float *)malloc(sizeof(float) * Poly->Nb_vertices);
-    float *y = (float *)malloc(sizeof(float) * Poly->Nb_vertices);
-
-    struct sVertex *current = Poly->p_first_vertex;
-    int i = 0;
-    while (current != NULL)
-    {
-        x[i] = current->x;
-        printf("x[%d] = %f\n", i, x[i]);
-
-        y[i] = current->y;
-        printf("y[%d] = %f\n", i, y[i]);
-        current = current->p_next;
-        i++;
-    }
-
-    SvgWritePolygon(IdFichSVG, x, y, Poly->Nb_vertices, pStyle);
-
-    int NbCol = 100;
-    int NbLig = 100;
-    // SvgWriteImage(IdFichSVG, "output.png", NbCol, NbLig);
-    free(x);
-    free(y);
-}
-
-tPolygon create_my_polygon(void)
-{
-    tPolygon poly = PolygonCreate();
-
-    // Adding vertices
-    polygon_add_vertex_at_end(0, 0, poly);
-    polygon_add_vertex_at_end(0, 10, poly);
-    polygon_add_vertex_at_end(0, 20, poly);
-    polygon_add_vertex_at_end(10, 10, poly);
-    polygon_add_vertex_at_end(10, 0, poly);
-    display_polygon(poly);
-    return poly;
-}
-
 void test_polygon_write_svg(void)
 {
     FILE *file = SvgCreate("output.svg", 1000, 1000);
@@ -388,12 +137,12 @@ void test_polygon_write_svg(void)
     tStyle *Style = (tStyle *)malloc(sizeof(tStyle));
 
     Style->ColorTrait = "blue";
-    Style->WidthTrait = 0.5;
+    Style->WidthTrait = 0.125;
     Style->OpaciteTrait = 1;
     Style->ColorFill = "none";
-    Style->OpacityFill = 30;
+    Style->OpacityFill = 0;
     Style->ColorPoints = "red";
-    Style->RadiusPoints = 0.5;
+    Style->RadiusPoints = 0.125;
 
     PolygonWriteSvg(Poly, Style, file);
     SvgClose(file);
@@ -403,7 +152,6 @@ void test_polygon_write_svg(void)
 
 int main()
 {
-
     printf("Test Add At the Beginning\n");
     test_add_vertex_at_begin();
 

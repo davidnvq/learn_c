@@ -1,2 +1,2 @@
-testpolygon: testpolygon.c
-	gcc -o testpolygon testpolygon.c
+level1: testpolygon.c
+	gcc -o level1 testpolygon.c; ./level1

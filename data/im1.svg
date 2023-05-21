@@ -1,0 +1,29 @@
+<svg viewBox="-0.5 -0.5 9.5 9.5" width="10" height="10"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M5.000000 1.000000 L6.000000 1.000000 L7.000000 2.000000 L8.000000 3.000000 L7.000000 3.000000 L7.000000 4.000000 L7.000000 5.000000 L6.000000 5.000000 L5.000000 5.000000 L5.000000 6.000000 L4.000000 6.000000 L3.000000 7.000000 L3.000000 6.000000 L2.000000 6.000000 L1.000000 6.000000 L1.000000 5.000000 L2.000000 4.000000 L3.000000 3.000000 L4.000000 3.000000 L5.000000 3.000000 L5.000000 2.000000 Z"
+style="stroke:blue;stroke-width:0.125000;stroke-opacity:1.000000;fill:none;fill-opacity:0.000000;stroke-linecap:round;stroke-linejoin:round"  />
+  <circle cx="5.000000" cy="1.000000" r="0.125000" style="fill:red"/>
+  <circle cx="6.000000" cy="1.000000" r="0.125000" style="fill:red"/>
+  <circle cx="7.000000" cy="2.000000" r="0.125000" style="fill:red"/>
+  <circle cx="8.000000" cy="3.000000" r="0.125000" style="fill:red"/>
+  <circle cx="7.000000" cy="3.000000" r="0.125000" style="fill:red"/>
+  <circle cx="7.000000" cy="4.000000" r="0.125000" style="fill:red"/>
+  <circle cx="7.000000" cy="5.000000" r="0.125000" style="fill:red"/>
+  <circle cx="6.000000" cy="5.000000" r="0.125000" style="fill:red"/>
+  <circle cx="5.000000" cy="5.000000" r="0.125000" style="fill:red"/>
+  <circle cx="5.000000" cy="6.000000" r="0.125000" style="fill:red"/>
+  <circle cx="4.000000" cy="6.000000" r="0.125000" style="fill:red"/>
+  <circle cx="3.000000" cy="7.000000" r="0.125000" style="fill:red"/>
+  <circle cx="3.000000" cy="6.000000" r="0.125000" style="fill:red"/>
+  <circle cx="2.000000" cy="6.000000" r="0.125000" style="fill:red"/>
+  <circle cx="1.000000" cy="6.000000" r="0.125000" style="fill:red"/>
+  <circle cx="1.000000" cy="5.000000" r="0.125000" style="fill:red"/>
+  <circle cx="2.000000" cy="4.000000" r="0.125000" style="fill:red"/>
+  <circle cx="3.000000" cy="3.000000" r="0.125000" style="fill:red"/>
+  <circle cx="4.000000" cy="3.000000" r="0.125000" style="fill:red"/>
+  <circle cx="5.000000" cy="3.000000" r="0.125000" style="fill:red"/>
+  <circle cx="5.000000" cy="2.000000" r="0.125000" style="fill:red"/>
+<image x="-0.5" y="-0.5" width="10px" height="10px" opacity="0.5"
+       xlink:href="/Users/quang/workspace/projects/svg-final/data/im1.png"
+       image-rendering="pixelated">
+</image>

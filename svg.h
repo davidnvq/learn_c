@@ -3,28 +3,20 @@
 #include <stdio.h>
 
 /*
- * Module permettant de dessiner des polygones dans un fichier au format SVG
  * Module to draw polygons in a file in SVG format
  */
 
-// Style d'un polygone
 // Style of a polygon
 typedef struct sStyle
 {
-  char *CouleurTrait; // Couleur des segments
-  float LargeurTrait; // Largeur des segments en pixels
-  float OpaciteTrait; // Opacité des segments (compris entre 0 et 1)
-  char *CouleurRemplissage; // Couleur de remplissage du polygone ("none" pour aucun)
-  float OpaciteRemplissage; // Opacité du remplissage du polygone (compris entre 0 et 1)
-  char *CouleurPoints; // Couleur des sommets
-  float RayonPoints; // Rayon, en pixels, des points représentant les sommets
+  char *ColorTrait;   // Couleur of segments
+  float WidthTrait;   // Largeur of segments en pixels
+  float OpaciteTrait; // Opacity of segments (compris entre 0 et 1)
+  char *ColorFill;    // Polygon fill color ("none" for none)
+  float OpacityFill;  // Polygon fill opacity (between 0 and 1)
+  char *ColorPoints;  // vertex color
+  float RadiusPoints; // Radius, in pixels, of the points representing the vertices
 } tStyle;
-// Par exemple, pour obtenir des segments bleus d'une largeur de 0.125 pixel,
-// des sommets rouges de 0.125 pixel de rayon et aucun remplissage à l'intérieur du 
-// polygone, on peut utiliser le style suivant :
-// tStyle Style={"blue",0.125,1,"none",0,"red",0.125};
-// Les couleurs peuvent être spécifiées comme en HTML : "blue", "#0000FF", rgb(0,0,255).
-
 // For example, to get blue segments with a width of 0.125 pixels,
 // red vertices of 0.125 pixel radius and no fill inside the
 // polygon, we can use the following style:
@@ -32,90 +24,56 @@ typedef struct sStyle
 // Colors can be specified as in HTML: "blue", "#0000FF", rgb(0,0,255).
 
 /*
- * Création d'un fichier au format SVG
- * Si le fichier existe déjà, son contenu est écrasé
- * Entrées :
- *  - NomFichier : nom du fichier à créer
- *  - Largeur : largeur, en pixels de la zone de dessin
- *  - Hauteur : largeur, en pixels de la zone de dessin
- * Valeur de retour : identificateur du fichier ou NULL en cas de problème
-
  * Creation of a file in SVG format
-  * If the file already exists, its content is overwritten
-  * Entrances:
-  * - FileName: name of the file to create
-  * - Width: width, in pixels of the drawing area
-  * - Height: width, in pixels of the drawing area
-  * Return value: file identifier or NULL in case of problem
+ * If the file already exists, its content is overwritten
+ * Entrances:
+ * - FileName: name of the file to create
+ * - Width: width, in pixels of the drawing area
+ * - Height: width, in pixels of the drawing area
+ * Return value: file identifier or NULL in case of problem
  */
- 
-extern FILE *SvgCreer(char NomFichier[], int Largeur, int Hauteur);
+
+extern FILE *SvgCreate(char FileName[], int width, int height);
 
 /*
- * Écriture d'une image dans un fichier au format SVG
- * Le coin en haut à gauche du pixel en haut à gauche de l'image sera positionné en (0,0).
- * L'image n'est pas "embarquée" dans le fichier, seul un lien  est écrit.
- * Entrées :
- *  - IdFichSVG : identificateur du fichier SVG dans lequel va se faire l'écriture
- *  - NomFichierImage : nom du fichier contenant l'image à écrire (format PNG ou JPG)
- *  - NbCol : nombre de colonnes de l'image (largeur)
- *  - NbLig : nombre de lignes de l'image (hauteur)
-
  * Writing an image to an SVG format file
-  * The top left corner of the top left pixel of the image will be positioned at (0,0).
-  * The image is not "embedded" in the file, only a link is written.
-  * Entrances:
-  * - IdFichSVG: identifier of the SVG file in which the writing will be done
-  * - ImageFileName: name of the file containing the image to write (PNG or JPG format)
-  * - NbCol: number of columns in the image (width)
-  * - NbLig: number of lines in the image (height)
+ * The top left corner of the top left pixel of the image will be positioned at (0,0).
+ * The image is not "embedded" in the file, only a link is written.
+ * Entrances:
+ * - IdFichSVG: identifier of the SVG file in which the writing will be done
+ * - ImageFileName: name of the file containing the image to write (PNG or JPG format)
+ * - NbCol: number of columns in the image (width)
+ * - NbLig: number of lines in the image (height)
  */
-extern void SvgEcrireImage(FILE *IdFichSVG, char NomFichierImage[], int NbCol, int NbLig);
+extern void SvgWriteImage(FILE *IdFichSVG, char NameImage[], int NbCol, int NbRow);
 
 /*
- * Écriture d'un polygone dans un fichier au format SVG
- * Entrées :
- *  - IdFichSVG : identificateur du fichier SVG dans lequel va se faire l'écriture
- *  - x : tableau des NbSommets indices de colonnes des sommets du polygone
- *  - y : tableau des NbSommets indices de lignes des sommets du polygone
- *  - NbSommets : nombre de sommets du polygone
- *  - pStyle : adresse de la structure décrivant le style du polygone
+ * Writing a polygon to a file in SVG format
+ * Entrances:
+ * - IdFichSVG: identifier of the SVG file in which the writing will be done
+ * - x: table of NbVertices indexes of columns of the vertices of the polygon
+ * - y: table of NbVertices indices of lines of the vertices of the polygon
+ * - NbVertices: number of vertices of the polygon
+ * - pStyle: address of the structure describing the style of the polygon
  *
- * Le dernier sommet sera automatiquement relié par un segment au premier sommet.
- * Repère utilisé pour dessiner dans un fichier SVG :
-
-* Writing a polygon to a file in SVG format
-  * Entrances:
-  * - IdFichSVG: identifier of the SVG file in which the writing will be done
-  * - x: table of NbVertices indexes of columns of the vertices of the polygon
-  * - y: table of NbVertices indices of lines of the vertices of the polygon
-  * - NbVertices: number of vertices of the polygon
-  * - pStyle: address of the structure describing the style of the polygon
-  *
-  * The last vertex will be automatically connected by a segment to the first vertex.
-  * Mark used to draw in an SVG file:
-
+ * The last vertex will be automatically connected by a segment to the first vertex.
+ * Mark used to draw in an SVG file:
  * (0,0)--------> x
  *   |
  *   |
  *   |
  *   v
- *   y 
+ *   y
  */
-extern void SvgEcrirePolygone(FILE *IdFichSVG, float x[], float y[], int NbSommets, tStyle *pStyle);
+extern void SvgWritePolygon(FILE *IdFichSVG, float x[], float y[], int NbSommets, tStyle *pStyle);
 
 /*
- * Fermeture d'un fichier au format SVG
- * L'appel à cette fonction est indispensable pour que le fichier soit complet.
- * Entrée :
- *  - IdFichSVG : identificateur du fichier SVG à fermer
 * Closing a file in SVG format
   * The call to this function is essential for the file to be complete.
   * Entrance :
   * - IdFichSVG: identifier of the SVG file to close
 
  */
-extern void SvgFermer(FILE *IdFichSVG);
-
+extern void SvgClose(FILE *IdFichSVG);
 
 #endif /* SVG_H */
