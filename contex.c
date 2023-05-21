@@ -207,6 +207,7 @@ void ContourWriteOverImageSvg(char *ContourFileName, char *ImageFileName, int Nb
     printf("Hello \n");
     FILE *file = fopen(ContourFileName, "r");
     FILE *svgFile = SvgCreate(SVGFileName, NbLig, NbCol);
+    SvgWriteImage(svgFile, ImageFileName, NbCol, NbLig);
 
     int numRegions;
     fscanf(file, "%d", &numRegions);
@@ -234,8 +235,6 @@ void ContourWriteOverImageSvg(char *ContourFileName, char *ImageFileName, int Nb
 
     SvgClose(file);
     free(pStyle);
-
-    SvgWriteImage(svgFile, ImageFileName, NbCol, NbLig);
 }
 
 int main(int argc, char *argv[])

@@ -3,6 +3,13 @@
 
 #include "matrix.h"
 
+struct sImage
+{
+    int NbLig;      // Number of lines in the image
+    int NbCol;      // Number of columns in the image
+    tMatrix matrix; // Gray level matrix of the image
+};
+
 // Structure to represent an image
 typedef struct sImage *tImage;
 

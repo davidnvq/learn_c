@@ -2,17 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include "matrix.h"
+#include "image.h"
 
-// The corresponding private implementation type is :
+// The corresponding private implementation type is:
 
-struct sImage
-{
-    int NbLig;      // Number of lines in the image
-    int NbCol;      // Number of columns in the image
-    tMatrix matrix; // Gray level matrix of the image
-};
-
-typedef struct sImage *tImage;
 tImage ImAllocate(int NbLignes, int NbColonnes)
 {
     tImage image = (tImage)malloc(sizeof(struct sImage));
@@ -48,8 +41,7 @@ tImage ImAllocate(int NbLignes, int NbColonnes)
 
     return image;
 }
-// void ImLiberer(tImage *pIm) This function frees all the memory space occupied by the image of address pIm (the grayscale matrix and the sImage structure). This function must also assign the value NULL to the freed image (this avoids errors at runtime if we try to free the same image several times).
-// tImage ImAllocate(int NbLignes, int NbColonnes) This function allocates and initializes the memory space needed to store an image containing a matrix of NbRows and NbColumns grayscale. You will not initialize the values of the gray levels of the image.
+
 void ImLiberer(tImage *pIm)
 {
     if (pIm == NULL || *pIm == NULL)
