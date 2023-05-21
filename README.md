@@ -37,6 +37,7 @@ gcc testpolygon.c svg.c polygon.c -o testpolygon;
 gcc contex.c image.c polygon.c svg.c -o contex
 
 # Run the executable file contex as many times as you want!
+# tip: how to get the full path of a file in VS Code: just right click on the file -> copy path 
 ./contex "data/im0.pgm" "/full/data/im0.png" "full/data/contour0.ct" "full/data/im0.svg";
 
 # for im1
