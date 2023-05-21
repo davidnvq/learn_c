@@ -1,2 +1,2 @@
-testpolygon: testpolygon.c
-	gcc testpolygon.c svg.c -o testpolygon
+testpolygon : testpolygon.c svg.c polygon.c
+	gcc testpolygon.c svg.c polygon.c -o testpolygon;

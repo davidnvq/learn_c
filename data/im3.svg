@@ -1,5 +1,9 @@
 <svg viewBox="-0.5 -0.5 15.5 15.5" width="16" height="16"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<image x="-0.5" y="-0.5" width="16px" height="16px"
+       xlink:href="/Users/quang/workspace/projects/svg-final/data/im3.png"
+       image-rendering="pixelated">
+</image>
   <path d="M5.000000 1.000000 L6.000000 1.000000 L7.000000 2.000000 L8.000000 3.000000 L7.000000 3.000000 L7.000000 4.000000 L7.000000 5.000000 L6.000000 5.000000 L5.000000 5.000000 L5.000000 6.000000 L4.000000 6.000000 L3.000000 7.000000 L3.000000 6.000000 L2.000000 6.000000 L1.000000 6.000000 L1.000000 5.000000 L2.000000 4.000000 L3.000000 3.000000 L4.000000 3.000000 L5.000000 3.000000 L5.000000 2.000000 Z"
 style="stroke:blue;stroke-width:0.125000;stroke-opacity:1.000000;fill:none;fill-opacity:0.000000;stroke-linecap:round;stroke-linejoin:round"  />
   <circle cx="5.000000" cy="1.000000" r="0.125000" style="fill:red"/>
@@ -68,7 +72,4 @@ style="stroke:blue;stroke-width:0.125000;stroke-opacity:1.000000;fill:none;fill-
   <circle cx="3.000000" cy="11.000000" r="0.125000" style="fill:red"/>
   <circle cx="4.000000" cy="10.000000" r="0.125000" style="fill:red"/>
   <circle cx="5.000000" cy="9.000000" r="0.125000" style="fill:red"/>
-<image x="-0.5" y="-0.5" width="16px" height="16px" opacity="0.5"
-       xlink:href="/Users/quang/workspace/projects/svg-final/data/im3.png"
-       image-rendering="pixelated">
-</image>
+</svg>

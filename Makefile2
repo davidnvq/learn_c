@@ -1,5 +1,4 @@
-contex : 
+contex: contex.c image.c polygon.c svg.c 
 	gcc contex.c image.c polygon.c svg.c -o contex
-	# ./contex im2.pgm im2.png im2.ct im2.svg
 
 

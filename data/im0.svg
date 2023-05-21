@@ -1,5 +1,9 @@
 <svg viewBox="-0.5 -0.5 5.5 5.5" width="6" height="6"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<image x="-0.5" y="-0.5" width="6px" height="6px"
+       xlink:href="/Users/quang/workspace/projects/svg-final/data/im0.png"
+       image-rendering="pixelated">
+</image>
   <path d="M1.000000 1.000000 L2.000000 1.000000 L3.000000 1.000000 L3.000000 2.000000 L4.000000 3.000000 L4.000000 4.000000 L3.000000 4.000000 L2.000000 4.000000 L2.000000 3.000000 L1.000000 3.000000 L1.000000 2.000000 Z"
 style="stroke:blue;stroke-width:0.125000;stroke-opacity:1.000000;fill:none;fill-opacity:0.000000;stroke-linecap:round;stroke-linejoin:round"  />
   <circle cx="1.000000" cy="1.000000" r="0.125000" style="fill:red"/>
@@ -13,7 +17,4 @@ style="stroke:blue;stroke-width:0.125000;stroke-opacity:1.000000;fill:none;fill-
   <circle cx="2.000000" cy="3.000000" r="0.125000" style="fill:red"/>
   <circle cx="1.000000" cy="3.000000" r="0.125000" style="fill:red"/>
   <circle cx="1.000000" cy="2.000000" r="0.125000" style="fill:red"/>
-<image x="-0.5" y="-0.5" width="6px" height="6px" opacity="0.5"
-       xlink:href="/Users/quang/workspace/projects/svg-final/data/im0.png"
-       image-rendering="pixelated">
-</image>
+</svg>
