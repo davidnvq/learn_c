@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "polygon.c"
+#include "polygon.h"
 
 tPolygone create_a_polygon_with_n_vertices(int n_vertices)
 {
