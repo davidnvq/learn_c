@@ -8,20 +8,21 @@ typedef struct
     int cols;
     unsigned char **data;
 } Matrix;
+typedef unsigned char **tMatrix;
 
 // Function to allocate memory for a matrix
-Matrix *MatAllocate(int rows, int cols);
+tMatrix MatAllouer(int NbLig, int NbCol);
 
 // Function to read a matrix from input and return it
-Matrix *MatRead(int *pRows, int *pCols);
+tMatrix MatLire(int *pNbLig, int *pNbCol);
 
 // Function to display a matrix
-void MatDisplay(Matrix *mat);
+void MatDisplay(tMatrix Mat, int NbLig, int NbCol);
 
 // Function to create a copy of a matrix
-Matrix *MatCopy(Matrix *mat);
+tMatrix MatCopy(tMatrix Mat, int NbLig, int NbCol);
 
 // Function to deallocate memory used by a matrix
-void MatFree(Matrix **mat);
+void MatLiberer(tMatrix *pMat, int NbLig);
 
 #endif

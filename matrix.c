@@ -6,8 +6,6 @@
 #define NBCOLMAX 100
 unsigned char tab[NBLIGMAX][NBCOLMAX];
 
-typedef unsigned char **tMatrix;
-
 tMatrix MatAllouer(int NbLig, int NbCol)
 {
     // Allocate memory for the matrix data

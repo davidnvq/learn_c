@@ -2,20 +2,6 @@
 #include <stdlib.h>
 #include "polygon.h"
 
-struct sVertex // Vertex
-{
-    int x, y;
-    struct sVertex *p_next; // pNext
-};
-
-struct sPolygon
-{
-    int Nb_vertices;                // number of vertices
-    struct sVertex *p_first_vertex; // pointer to first vertex
-};
-
-typedef struct sPolygon *tPolygon;
-
 // return the number of vertices of the polygon
 int PolygoneNb_vertices(tPolygon Poly)
 {
@@ -235,7 +221,7 @@ void PolygonWriteSvg(tPolygon Poly, tStyle *pStyle, FILE *IdFichSVG)
     while (current != NULL)
     {
         y[i] = current->x;
-        printf("Write to svg x[%d] y[%d] = %f %f\n", i, i, x[i], y[i]);
+        // printf("Write to svg x[%d] y[%d] = %f %f\n", i, i, x[i], y[i]);
         x[i] = current->y;
         current = current->p_next;
         i++;

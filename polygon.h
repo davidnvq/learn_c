@@ -3,21 +3,21 @@
 
 #include "svg.h"
 
-struct sVertex
+struct sVertex // Vertex
 {
     int x, y;
-    struct sVertex *p_next;
+    struct sVertex *p_next; // pNext
 };
 
 struct sPolygon
 {
-    int Nb_vertices;
-    struct sVertex *p_first_vertex;
+    int Nb_vertices;                // number of vertices
+    struct sVertex *p_first_vertex; // pointer to first vertex
 };
 
 typedef struct sPolygon *tPolygon;
 
-int PolygonNb_vertices(tPolygon Poly);
+int PolygoneNb_vertices(tPolygon Poly);
 
 tPolygon PolygonCreate(void);
 
@@ -38,7 +38,5 @@ tPolygon PolygonRead(FILE *f);
 void PolygonWrite(tPolygon Poly, FILE *f);
 
 void delete_polygon_vertex_i(int i, tPolygon Poly);
-
 void PolygonWriteSvg(tPolygon Poly, tStyle *pStyle, FILE *IdFichSVG);
-
 #endif
